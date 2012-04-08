@@ -7,7 +7,8 @@
          is_prime/1,
          is_prime_with_list/2,
          prime_sequence/1,
-         prime_div/1
+         prime_div/1,
+         gen_palindromes/2
          ]).
 
 %% Fib sequence
@@ -53,6 +54,25 @@ prime_div(N) ->
     Prime_seq = prime_sequence(Square_N),
     [X || X <- Prime_seq, N rem X =:= 0].
 
+%% Palindrom
+
+is_palindrome(T) ->
+    case is_list(T) of
+        true ->
+            T =:= lists:reverse(T);
+        false ->
+            TT = integer_to_list(T),
+            TT =:= lists:reverse(TT)
+    end.
+
+gen_palindromes(Start, End) ->
+    [ A*B ||
+        A <- lists:seq(Start, End),
+        B <- lists:seq(Start, A),
+        is_palindrome(A*B)
+    ].
+
+
 %%%%%%%%%%
 %% Tests
 %%%%%%%%%%
@@ -62,5 +82,11 @@ peutils_test_() ->
      ?_assertEqual([1,2,3,5,8,13,21], fib_sequence(21)),
      ?_assertEqual([1,2,3,5,8,13,21], fib_sequence(22)),
      ?_assertEqual(true, is_prime(7)),
-     ?_assertEqual(false, is_prime(8))
+     ?_assertEqual(false, is_prime(8)),
+     ?_assertEqual(true, is_palindrome("aba")),
+     ?_assertEqual(true, is_palindrome("a")),
+     ?_assertEqual(true, is_palindrome("abba")),
+     ?_assertEqual(true, is_palindrome("abbcbba")),
+     ?_assertEqual(true, is_palindrome(12321)),
+     ?_assertEqual(false, is_palindrome("ab"))
     ]}.
