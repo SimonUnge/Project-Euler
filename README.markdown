@@ -1,1 +1,3 @@
-### My solutions to Project Euler problems using Erlang.
+#Project Euler problems using Erlang.
+
+My humble attempt to solve Project Euler with Erlang.
