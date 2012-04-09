@@ -8,7 +8,9 @@
           problem_1/0,
           problem_2/0,
           problem_3/0,
-          problem_4/0
+          problem_4/0,
+          %problem_5/0,
+          problem_6/0
           ]).
 
 
@@ -27,13 +29,23 @@ problem_2() ->
 
 problem_3() ->
 	[H|_] = peutils:prime_div(600851475143),
-  {ok, H}.
+    {ok, H}.
 
-%% Problem
+%% Problem 4
 
 problem_4() ->
-  L = peutils:gen_palindromes(100,999),
-  {ok, tlists:max(L)}.
+     L = peutils:gen_palindromes(100,999),
+    {ok, tlists:max(L)}.
+
+%% Problem 5
+%% Problem 6
+
+problem_6() ->
+    N = lists:seq(1,100),
+    N_sum = lists:sum(N),
+    N_sum_of_squares = lists:foldl(fun(X,Sum) -> (X*X) + Sum end, 0, N),
+    N_square_of_the_sum = N_sum * N_sum,
+    N_square_of_the_sum - N_sum_of_squares.
 
 %% Tests
 
